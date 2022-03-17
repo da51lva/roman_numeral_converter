@@ -55,7 +55,7 @@ public class RomanNumeralConverterTest  {
 
     @Test
     public void checkNumeralsOutOfRange(){
-        assertEquals(-1,rmc.convertNumeral("XX"));
+        assertEquals(-1,rmc.convertNumeral("L"));
     }
 
     @Test
