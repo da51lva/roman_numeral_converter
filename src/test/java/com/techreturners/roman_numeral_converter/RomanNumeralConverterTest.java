@@ -70,17 +70,17 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void checkString(){
-        assertEquals(-1, "the quick brown fox jumps over the lazy dog");
+        assertEquals(-1, rmc.convertNumeral("the quick brown fox jumps over the lazy dog"));
     }
 
     @Test
     public void checkStringStartingWithNumeral(){
-        assertEquals(-1, "I the quick brown fox jumps over the lazy dog");
+        assertEquals(-1, rmc.convertNumeral("I the quick brown fox jumps over the lazy dog"));
     }
 
     @Test
     public void checkStringEndingWithNumeral(){
-        assertEquals(-1, "the quick brown fox jumps over the lazy dog X");
+        assertEquals(-1, rmc.convertNumeral("the quick brown fox jumps over the lazy dog X"));
     }
 
 
