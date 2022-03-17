@@ -1,6 +1,7 @@
 package com.techreturners.roman_numeral_converter;
 
 import java.util.Map;
+import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -8,6 +9,30 @@ public class RomanNumeralConverter {
 
     private static final Pattern NUMERAL_PATTERN = Pattern.compile("^[IVX]+$");
     private static final Map<Character, Integer> basicSymbolValues = Map.of('I', 1, 'V', 5, 'X', 10); //map containing the basic numeral symbols anb their values
+
+    private static final String CONSOLE_MESSAGE = "Please enter a Roman Numeral to convert. Enter 'q' to quit the application";
+
+    public static void main (String[] args){
+        
+        String input = "";
+        Scanner s = new Scanner(System.in);;
+        System.out.println(CONSOLE_MESSAGE);
+
+        while (!(input = s.next()).equals("q")){
+
+            RomanNumeralConverter rmc = new RomanNumeralConverter();
+            int output = rmc.convertNumeral(input);
+            if (output == -1)
+                System.out.println("Invalid input: Please enter a single Roman Numeral only containing the symbols 'I', 'V' and 'X'");
+            else
+                System.out.println(rmc.convertNumeral(input));
+
+            System.out.println(CONSOLE_MESSAGE);
+        }
+        
+        s.close();
+
+    }
 
     public int convertNumeral(String numeral) {
         String cleanInput = numeral.toUpperCase().trim();
