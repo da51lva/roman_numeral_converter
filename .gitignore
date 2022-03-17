@@ -24,3 +24,6 @@ hs_err_pid*
 
 #Intelli J files
 .idea/
+
+#Maven
+target/
