@@ -4,9 +4,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class RomanNumeralConverterTest {
+public class RomanNumeralConverterTest  {
 
     private RomanNumeralConverter rmc;
 
@@ -40,7 +41,7 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void checkNumerals1To10LowerCase(){
-        String[] numerals = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "xi", "x"};
+        String[] numerals = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"};
 
         for(int i = 0; i < numerals.length; i++)
             assertEquals(i+1, rmc.convertNumeral(numerals[i]));
