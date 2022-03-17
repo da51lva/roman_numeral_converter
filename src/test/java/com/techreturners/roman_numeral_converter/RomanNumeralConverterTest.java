@@ -48,10 +48,13 @@ public class RomanNumeralConverterTest  {
     }
 
     @Test
-    @Disabled("Disabled until expected behaviour is decided")
     public void checkNumerals1To10Mixed(){
-       //todo: what behaviour to expect when a numeral contains a mixture of uppercase and lowercase characters?
+        String[] numerals = {"i", "iI", "iiI", "Iv", "V", "vI", "vIi", "vIiI", "iX", "x"};
+
+        for(int i = 0; i < numerals.length; i++)
+            assertEquals(i+1, rmc.convertNumeral(numerals[i]));
     }
+
 
     @Test
     public void checkNumeralsOutOfRange(){
