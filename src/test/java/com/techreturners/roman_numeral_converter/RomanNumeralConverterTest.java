@@ -57,7 +57,14 @@ public class RomanNumeralConverterTest {
             assertEquals(i + 1, rmc.convertNumeral(numerals[i]));
     }
 
-    //todo check 1- 38
+    @Test
+    public void checkCorrectNumeralWithLeadingAndTrailingWhiteSpaces(){
+        assertEquals(1, rmc.convertNumeral(" I"));
+        assertEquals(10, rmc.convertNumeral("X "));
+        assertEquals(5, rmc.convertNumeral(" V "));
+        assertEquals(1, rmc.convertNumeral("     I"));
+        assertEquals(1, rmc.convertNumeral(" I       "));
+    }
 
     @Test
     public void checkNumeralsOutOfRange() {
