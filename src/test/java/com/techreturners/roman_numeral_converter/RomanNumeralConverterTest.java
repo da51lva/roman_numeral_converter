@@ -1,14 +1,14 @@
 package com.techreturners.roman_numeral_converter;
 
 import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.net.URL;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class RomanNumeralConverterTest {
 
@@ -37,7 +37,7 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void checkNumerals1To38UpperCase() {
+    public void checkCorrectNumerals1To38UpperCase() {
         String[] numerals = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV",
                              "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI",
                              "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI",
@@ -50,14 +50,20 @@ public class RomanNumeralConverterTest {
     @Test
     public void checkCorrectNumerals1To3888() {
 
+        Scanner s = null;
+
         try {
 
             //load test resource
-            ClassLoader classLoader = getClass().getClassLoader();
-            File numeralsFile = new File(classLoader.getResource(NUMERALS_FILENAME).getFile());
-            Scanner s = new Scanner(numeralsFile);
+            URL url =  getClass().getClassLoader().getResource(NUMERALS_FILENAME);
+            if (url == null)
+                throw new FileNotFoundException();
+
+            File numeralsFile = new File(url.getFile());
+            s = new Scanner(numeralsFile);
             s.useDelimiter(",");
 
+            //test every numeral in the test file ascending
             int count = 1;
             while (s.hasNext()) {
                 assertEquals(count, rmc.convertNumeral(s.next())); //test resource contains numerals in ascending order from 1-3888
@@ -65,13 +71,16 @@ public class RomanNumeralConverterTest {
             }
 
         } catch (FileNotFoundException e) {
-            System.err.println("Error loading test resource");
+            fail("Error loading test resource file: "+NUMERALS_FILENAME);
             e.printStackTrace();
+        } finally {
+            if(s != null)
+                s.close();
         }
     }
 
     @Test
-    public void checkNumerals1To10LowerCase() {
+    public void checkCorrectNumerals1To10LowerCase() {
         String[] numerals = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"};
 
         for (int i = 0; i < numerals.length; i++)
