@@ -31,8 +31,11 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void checkNumerals1To10UpperCase() {
-        String[] numerals = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
+    public void checkNumerals1To38UpperCase() {
+        String[] numerals = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV",
+                             "XV", "XVI", "XVII", "XVIII", "XIX", "XX", "XXI", "XXII", "XXIII", "XXIV", "XXV", "XXVI",
+                             "XXVII", "XXVIII", "XXIX", "XXX", "XXXI", "XXXII", "XXXIII", "XXXIV", "XXXV", "XXXVI",
+                             "XXXVII", "XXXVIII"};
 
         for (int i = 0; i < numerals.length; i++)
             assertEquals(i + 1, rmc.convertNumeral(numerals[i]));
@@ -54,6 +57,7 @@ public class RomanNumeralConverterTest {
             assertEquals(i + 1, rmc.convertNumeral(numerals[i]));
     }
 
+    //todo check 1- 38
 
     @Test
     public void checkNumeralsOutOfRange() {
@@ -99,8 +103,8 @@ public class RomanNumeralConverterTest {
     }
 
     /**
-     * Correct roman numeral syntax does not allow I or X to be repeated more than 3 times in succession
-     * Source: https://www.math-only-math.com/rules-for-formation-of-roman-numerals.html
+     * Correct roman numeral syntax does not allow I or X to be repeated more than 3 times in succession Source:
+     * https://www.math-only-math.com/rules-for-formation-of-roman-numerals.html
      */
     @Test
     public void checkRNSyntaxNoMoreThanThreeRepeated() {
@@ -112,8 +116,8 @@ public class RomanNumeralConverterTest {
 
 
     /**
-     * Correct roman numeral syntax only allows one smaller number in front of a larger one
-     * Source: https://www.dictionary.com/e/roman-numerals/
+     * Correct roman numeral syntax only allows one smaller number in front of a larger one Source:
+     * https://www.dictionary.com/e/roman-numerals/
      */
     @Test
     public void checkRNSyntaxOnlyOneSmallerNumeralInFrontOfALarger() {
@@ -126,11 +130,12 @@ public class RomanNumeralConverterTest {
 
     /**
      * The same numeral should not be added and subtracted.
-     * E.g. IXI would equal 10, however the correct notation for 10 is X.
+     * E.g. IXI would equal 10, however the correct notation for 10
+     * is X.
      */
     @Test
-    public void checkRNSyntaxSameNumberSubtractedAndAdded(){
-        assertEquals(-1,rmc.convertNumeral("IVI"));
+    public void checkRNSyntaxSameNumberSubtractedAndAdded() {
+        assertEquals(-1, rmc.convertNumeral("IVI"));
         assertEquals(-1, rmc.convertNumeral("IXI"));
         assertEquals(-1, rmc.convertNumeral("IVII"));
         assertEquals(-1, rmc.convertNumeral("IXII"));
@@ -141,26 +146,27 @@ public class RomanNumeralConverterTest {
      * Source: https://www.math-only-math.com/rules-for-formation-of-roman-numerals.html
      */
     @Test
-    public void checkRNSyntaxVNotSubtracted(){
-        assertEquals(-1,rmc.convertNumeral("VX"));
-        assertEquals(-1,rmc.convertNumeral("VXX"));
-        assertEquals(-1,rmc.convertNumeral("VIX"));
+    public void checkRNSyntaxVNotSubtracted() {
+        assertEquals(-1, rmc.convertNumeral("VX"));
+        assertEquals(-1, rmc.convertNumeral("VXX"));
+        assertEquals(-1, rmc.convertNumeral("VIX"));
     }
 
     /**
-     * A numeral of lower value, should not stand in front of a pair of numerals in subtractive notation
-     * E.g For VIX, V (5) stands before IX (9) so is invalid
+     * A numeral of lower value, should not stand in front of a pair of numerals in subtractive notation E.g For VIX, V
+     * (5) stands before IX (9) so is invalid.
      * Source: https://www.numere-romane.ro/
      */
     @Test
-    public void checkRNSyntaxCorrectSubtractiveNotation(){
-        assertEquals(-1,rmc.convertNumeral("VIX"));
-        assertEquals(-1,"VIIX");
-        assertEquals(-1,rmc.convertNumeral("VIXX"));
+    public void checkRNSyntaxCorrectSubtractiveNotation() {
+        assertEquals(-1, rmc.convertNumeral("VIX"));
+        assertEquals(-1, "VIIX");
+        assertEquals(-1, rmc.convertNumeral("VIXX"));
     }
 
     /**
-     * This test ensures for subtraction, a smaller numeral is only placed in front of the two numerals closest to it. For example IV, or IX is valid, but IL, IC, IM are not
+     * This test ensures for subtraction, a smaller numeral is only placed in front of the two numerals closest to it.
+     * For example IV, or IX is valid, but IL, IC, IM are not.
      * Source: https://www.dictionary.com/e/roman-numerals/
      */
     @Test
