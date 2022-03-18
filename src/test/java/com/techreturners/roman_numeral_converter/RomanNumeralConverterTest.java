@@ -4,9 +4,15 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class RomanNumeralConverterTest {
+
+    private static final String NUMERALS_FILENAME = "numerals-1-to-3888.csv";
 
     private RomanNumeralConverter rmc;
 
@@ -42,6 +48,29 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
+    public void checkCorrectNumerals1To3888() {
+
+        try {
+
+            //load test resource
+            ClassLoader classLoader = getClass().getClassLoader();
+            File numeralsFile = new File(classLoader.getResource(NUMERALS_FILENAME).getFile());
+            Scanner s = new Scanner(numeralsFile);
+            s.useDelimiter(",");
+
+            int count = 1;
+            while (s.hasNext()) {
+                assertEquals(count, rmc.convertNumeral(s.next())); //test resource contains numerals in ascending order from 1-3888
+                count++;
+            }
+
+        } catch (FileNotFoundException e) {
+            System.err.println("Error loading test resource");
+            e.printStackTrace();
+        }
+    }
+
+    @Test
     public void checkNumerals1To10LowerCase() {
         String[] numerals = {"i", "ii", "iii", "iv", "v", "vi", "vii", "viii", "ix", "x"};
 
@@ -58,7 +87,7 @@ public class RomanNumeralConverterTest {
     }
 
     @Test
-    public void checkCorrectNumeralWithLeadingAndTrailingWhiteSpaces(){
+    public void checkCorrectNumeralWithLeadingAndTrailingWhiteSpaces() {
         assertEquals(1, rmc.convertNumeral(" I"));
         assertEquals(10, rmc.convertNumeral("X "));
         assertEquals(5, rmc.convertNumeral(" V "));
