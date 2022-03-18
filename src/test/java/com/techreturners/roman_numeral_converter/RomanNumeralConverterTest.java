@@ -97,7 +97,8 @@ public class RomanNumeralConverterTest {
 
     @Test
     public void checkNumeralsOutOfRange() {
-        assertEquals(-1, rmc.convertNumeral("L"));
+        assertEquals(-1, rmc.convertNumeral("MMMM"));
+        assertEquals(-1, rmc.convertNumeral("MMMDCCCLXXXVIIII"));
     }
 
     @Test
