@@ -127,19 +127,23 @@ public class RomanNumeralConverterTest {
     }
 
     /**
-     * Correct roman numeral syntax does not allow V to be repeated.
+     * Correct roman numeral syntax does not allow V, L, D to be repeated in succession.
      * Source: https://www.math-only-math.com/rules-for-formation-of-roman-numerals.html
      */
     @Test
-    public void checkRNSyntaxVNotRepeated() {
+    public void checkRNSyntaxVOrLOrDNotRepeated() {
         assertEquals(-1, rmc.convertNumeral("VV"));
         assertEquals(-1, rmc.convertNumeral("VVV"));
         assertEquals(-1, rmc.convertNumeral("VVXX"));
-        assertEquals(-1, rmc.convertNumeral("XXXVV"));
+        assertEquals(-1, rmc.convertNumeral("MDD"));
+        assertEquals(-1, rmc.convertNumeral("CCLLLX"));
+        assertEquals(-1, rmc.convertNumeral("LL"));
+        assertEquals(-1, rmc.convertNumeral("MCCCLLXXVV"));
+        assertEquals(-1, rmc.convertNumeral("XCLLL"));
     }
 
     /**
-     * Correct roman numeral syntax does not allow I or X to be repeated more than 3 times in succession Source:
+     * Correct roman numeral syntax does not allow I, X, C or M to be repeated more than 3 times in succession Source:
      * https://www.math-only-math.com/rules-for-formation-of-roman-numerals.html
      */
     @Test
@@ -147,9 +151,24 @@ public class RomanNumeralConverterTest {
         assertEquals(-1, rmc.convertNumeral("XXXX"));
         assertEquals(-1, rmc.convertNumeral("IIIII"));
         assertEquals(-1, rmc.convertNumeral("XIIII"));
-        assertEquals(-1, rmc.convertNumeral("IIIIIIX"));
+        assertEquals(-1, rmc.convertNumeral("MMMM"));
+        assertEquals(-1, rmc.convertNumeral("CCCCCCCCCCCCCCC"));
+        assertEquals(-1, rmc.convertNumeral("MCCCCCC"));
+        assertEquals(-1, rmc.convertNumeral("CCCXXXX"));
+        assertEquals(-1, rmc.convertNumeral("MDCLXXXVIIII"));
     }
 
+
+    /**
+     * V, L or D should never be subtracted (stand before a numeral of higher value)
+     * Source: https://www.math-only-math.com/rules-for-formation-of-roman-numerals.html
+     */
+    @Test
+    public void checkRNSyntaxVNotSubtracted() {
+        assertEquals(-1, rmc.convertNumeral("VX"));
+        assertEquals(-1, rmc.convertNumeral("VXX"));
+        assertEquals(-1, rmc.convertNumeral("VIX"));
+    }
 
     /**
      * Correct roman numeral syntax only allows one smaller number in front of a larger one Source:
@@ -162,6 +181,9 @@ public class RomanNumeralConverterTest {
         assertEquals(-1, rmc.convertNumeral("IIV"));
         assertEquals(-1, rmc.convertNumeral("IIIV"));
         assertEquals(-1, rmc.convertNumeral("VVX"));
+        assertEquals(-1, rmc.convertNumeral("CCM"));
+        assertEquals(-1, rmc.convertNumeral("XXC"));
+        assertEquals(-1, rmc.convertNumeral("XXL"));
     }
 
     /**
@@ -175,17 +197,10 @@ public class RomanNumeralConverterTest {
         assertEquals(-1, rmc.convertNumeral("IXI"));
         assertEquals(-1, rmc.convertNumeral("IVII"));
         assertEquals(-1, rmc.convertNumeral("IXII"));
-    }
-
-    /**
-     * V should never stand before a numeral of higher value
-     * Source: https://www.math-only-math.com/rules-for-formation-of-roman-numerals.html
-     */
-    @Test
-    public void checkRNSyntaxVNotSubtracted() {
-        assertEquals(-1, rmc.convertNumeral("VX"));
-        assertEquals(-1, rmc.convertNumeral("VXX"));
-        assertEquals(-1, rmc.convertNumeral("VIX"));
+        assertEquals(-1, rmc.convertNumeral("CMC"));
+        assertEquals(-1, rmc.convertNumeral("XCXXX"));
+        assertEquals(-1, rmc.convertNumeral("XLX"));
+        assertEquals(-1, rmc.convertNumeral("CDCC"));
     }
 
     /**
@@ -198,6 +213,10 @@ public class RomanNumeralConverterTest {
         assertEquals(-1, rmc.convertNumeral("VIX"));
         assertEquals(-1, rmc.convertNumeral("VIIX"));
         assertEquals(-1, rmc.convertNumeral("VIXX"));
+        assertEquals(-1, rmc.convertNumeral("XCM"));
+        assertEquals(-1, rmc.convertNumeral("IXL"));
+        assertEquals(-1, rmc.convertNumeral("CCM"));
+        assertEquals(-1, rmc.convertNumeral("CCD"));
     }
 
     /**
@@ -213,6 +232,9 @@ public class RomanNumeralConverterTest {
         assertEquals(-1, rmc.convertNumeral("IXX"));
         assertEquals(-1, rmc.convertNumeral("IXXX"));
         assertEquals(-1, rmc.convertNumeral("XIXX"));
+        assertEquals(-1, rmc.convertNumeral("XXL"));
+        assertEquals(-1, rmc.convertNumeral("IXC"));
+        assertEquals(-1, rmc.convertNumeral("ICMM"));
     }
 
     /**
@@ -221,8 +243,13 @@ public class RomanNumeralConverterTest {
      * Source: https://www.dictionary.com/e/roman-numerals/
      */
     @Test
-    @Disabled("Disabled until larger numerals are introduced as there is no way to test this currently")
     public void checkRNSyntaxSubtractiveSmallerNumeralInFrontOfTwoClosestNumerals() {
+        assertEquals(-1, rmc.convertNumeral("IL"));
+        assertEquals(-1, rmc.convertNumeral("IC"));
+        assertEquals(-1, rmc.convertNumeral("ID"));
+        assertEquals(-1, rmc.convertNumeral("IM"));
+        assertEquals(-1, rmc.convertNumeral("XD"));
+        assertEquals(-1, rmc.convertNumeral("XM"));
 
     }
 }
