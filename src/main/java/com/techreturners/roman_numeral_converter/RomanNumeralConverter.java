@@ -7,18 +7,19 @@ import java.util.regex.Pattern;
 
 public class RomanNumeralConverter {
 
-    private static final Pattern NUMERAL_PATTERN = Pattern.compile("^(X{0,3})(IX|IV|V?I{0,3})$");
-    private static final Map<Character, Integer> basicSymbolValues = Map.of('I', 1, 'V', 5, 'X', 10); //map containing the basic numeral symbols anb their values
+    private static final Pattern NUMERAL_PATTERN = Pattern.compile("^M{0,3}(CM|CD|D?C{0,3})(XC|XL|L?X{0,3})(IX|IV|V?I{0,3})$");
+    private static final Map<Character, Integer> basicSymbolValues = Map.of('I', 1, 'V', 5, 'X', 10, 'L', 50, 'C', 100, 'D', 500, 'M', 1000); //map containing the basic numeral symbols anb their values
 
     private static final String CONSOLE_MESSAGE = "Please enter a Roman Numeral to convert. Enter 'q' to quit the application";
 
-    public static void main (String[] args){
-        
+    public static void main(String[] args) {
+
         String input = "";
-        Scanner s = new Scanner(System.in);;
+        Scanner s = new Scanner(System.in);
+        ;
         System.out.println(CONSOLE_MESSAGE);
 
-        while (!(input = s.next()).equals("q")){
+        while (!(input = s.next()).equals("q")) {
 
             RomanNumeralConverter rmc = new RomanNumeralConverter();
             int output = rmc.convertNumeral(input);
@@ -29,7 +30,7 @@ public class RomanNumeralConverter {
 
             System.out.println(CONSOLE_MESSAGE);
         }
-        
+
         s.close();
 
     }
@@ -77,10 +78,9 @@ public class RomanNumeralConverter {
      * @return
      */
     private boolean validInput(String input) {
-        if (input.isEmpty()){ //regex will match empty string
+        if (input.isEmpty()) { //regex will match empty string
             return false;
-        }
-        else{
+        } else {
             Matcher matcher = NUMERAL_PATTERN.matcher(input);
             return matcher.find();
         }
