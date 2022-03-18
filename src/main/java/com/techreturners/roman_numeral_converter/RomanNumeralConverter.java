@@ -7,7 +7,7 @@ import java.util.regex.Pattern;
 
 public class RomanNumeralConverter {
 
-    private static final Pattern NUMERAL_PATTERN = Pattern.compile("^[IVX]+$");
+    private static final Pattern NUMERAL_PATTERN = Pattern.compile("^(X{0,3})(IX|IV|V?I{0,3})$");
     private static final Map<Character, Integer> basicSymbolValues = Map.of('I', 1, 'V', 5, 'X', 10); //map containing the basic numeral symbols anb their values
 
     private static final String CONSOLE_MESSAGE = "Please enter a Roman Numeral to convert. Enter 'q' to quit the application";
@@ -77,8 +77,13 @@ public class RomanNumeralConverter {
      * @return
      */
     private boolean validInput(String input) {
-        Matcher matcher = NUMERAL_PATTERN.matcher(input);
-        return matcher.find();
+        if (input.isEmpty()){ //regex will match empty string
+            return false;
+        }
+        else{
+            Matcher matcher = NUMERAL_PATTERN.matcher(input);
+            return matcher.find();
+        }
     }
 
 
