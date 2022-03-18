@@ -2,4 +2,4 @@
 
 This is coding exercise from the Tech Returners course.
 
-A console application for converting numbers roman numerals (I - X) to numbers (1 - 10).
+A console application for converting roman numerals (1 - 38) to numbers.
