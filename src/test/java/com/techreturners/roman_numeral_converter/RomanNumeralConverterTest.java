@@ -160,7 +160,7 @@ public class RomanNumeralConverterTest {
     @Test
     public void checkRNSyntaxCorrectSubtractiveNotation() {
         assertEquals(-1, rmc.convertNumeral("VIX"));
-        assertEquals(-1, "VIIX");
+        assertEquals(-1, rmc.convertNumeral("VIIX"));
         assertEquals(-1, rmc.convertNumeral("VIXX"));
     }
 
