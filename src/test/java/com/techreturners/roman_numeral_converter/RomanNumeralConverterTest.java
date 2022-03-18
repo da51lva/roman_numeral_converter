@@ -153,8 +153,8 @@ public class RomanNumeralConverterTest {
     }
 
     /**
-     * A numeral of lower value, should not stand in front of a pair of numerals in subtractive notation E.g For VIX, V
-     * (5) stands before IX (9) so is invalid.
+     * A numeral of lower value, should not stand in front of a pair of numerals in subtractive notation.
+     * E.g For VIX, V (5) stands before IX (9) so is invalid.
      * Source: https://www.numere-romane.ro/
      */
     @Test
@@ -162,6 +162,21 @@ public class RomanNumeralConverterTest {
         assertEquals(-1, rmc.convertNumeral("VIX"));
         assertEquals(-1, "VIIX");
         assertEquals(-1, rmc.convertNumeral("VIXX"));
+    }
+
+    /**
+     * After grouping any numerals in subtractive notation the numeral weights should be equal or sorted in descending
+     * order for additive notation
+     * E.g. IXX - (IX) is in subtractive notation, so the result is XI (9) then X (10) which is ascending. So this is
+     * invalid
+     * E.g. XIX - (IX) is in subtractive notation, so the result is X (10) then IX (9) which is descending. So this is
+     * valid
+     */
+    @Test
+    public void checkRNSyntaxCorrectAdditiveNotation() {
+        assertEquals(-1, rmc.convertNumeral("IXX"));
+        assertEquals(-1, rmc.convertNumeral("IXXX"));
+        assertEquals(-1, rmc.convertNumeral("XIXX"));
     }
 
     /**
