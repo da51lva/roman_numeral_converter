@@ -24,7 +24,8 @@ public class RomanNumeralConverter {
             RomanNumeralConverter rmc = new RomanNumeralConverter();
             int output = rmc.convertNumeral(input);
             if (output == -1)
-                System.out.println("Invalid input: Please enter a single Roman Numeral only containing the symbols 'I', 'V' and 'X'");
+                System.out.println(
+                        "Invalid input: Please enter a correct Roman Numeral using the symbols I, V, X, L, C, D, M");
             else
                 System.out.println(rmc.convertNumeral(input));
 
@@ -35,6 +36,12 @@ public class RomanNumeralConverter {
 
     }
 
+    /**
+     * Converts a roman numeral to a number
+     *
+     * @param numeral
+     * @return the converted number. -1 if the input string is invalid
+     */
     public int convertNumeral(String numeral) {
         String cleanInput = numeral.toUpperCase().trim();
         if (validInput(cleanInput))
